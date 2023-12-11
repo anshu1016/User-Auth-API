@@ -80,12 +80,11 @@ const login = async (req, res) => {
 //CHange Password
 
 const changePassword = async (req, res) => {
-  const { personID } = req.params;
-  const { currentPassword, newPassword } = req.body;
+  const { email, currentPassword, newPassword } = req.body;
 
   try {
-    // Find the user by ID
-    const user = await PersonModel.findById(personID);
+    // Find the user by email
+    const user = await PersonModel.findOne({ email });
 
     // Check if the user exists
     if (!user) {
@@ -122,6 +121,9 @@ const changePassword = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
 
 //Change Profile Picture
 
